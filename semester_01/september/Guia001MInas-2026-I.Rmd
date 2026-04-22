@@ -1,0 +1,120 @@
+---
+title: 'Guía de Práctica: Ecuaciones Diferenciales de Variables Separadas'
+author: "VQD"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Introducción
+
+Las ecuaciones diferenciales son herramientas fundamentales en la modelización de diversos procesos físicos en la ingeniería de minas. Este documento aborda el método de variables separadas, el cual es ampliamente utilizado para resolver ecuaciones diferenciales ordinarias de primer orden. Se presentarán aplicaciones típicas en problemas de flujo de aguas subterráneas, concentración de contaminantes y enfriamiento en equipos mineros.
+
+***
+
+# Teoría Básica
+
+Una **ecuación diferencial de variables separables** tiene la forma:
+\[
+\frac{dy}{dx} = f(x)g(y)
+\]
+y puede escribirse como:
+\[
+\frac{1}{g(y)} dy = f(x) dx
+\]
+Luego, se integran ambos miembros:
+\[
+\int \frac{1}{g(y)} dy = \int f(x) dx
+\]
+
+***
+
+# Ejemplo resuelto: Enfriamiento de un equipo minero
+
+Un componente del sistema de ventilación de una mina sale del túnel a una temperatura de 150°C y es expuesto al aire ambiente a 30°C. El enfriamiento ocurre de acuerdo con la ley de Newton:
+\[
+\frac{dT}{dt} = -k(T - T_a)
+\]
+donde:
+- \( T \): temperatura del equipo,
+- \( T_a = 30°C \): temperatura ambiente,
+- \( k \): constante de enfriamiento (\(k>0\)).
+
+**Solución:**
+
+Separando variables:
+\[
+\frac{dT}{T-T_a} = -k\,dt
+\]
+
+Integrando:
+\[
+\int \frac{dT}{T-T_a} = -k \int dt \implies \ln|T-T_a| = -kt + C
+\]
+
+Despejando \( T \), usando la condición inicial \( T(0) = 150 \):
+
+\[
+T(t) = T_a + (150 - 30) e^{-kt} = 30 + 120 e^{-kt}
+\]
+
+***
+
+# Ejemplo de aplicación en R
+
+Calcula la temperatura en función del tiempo para \( k = 0.02 \) y representalo en un gráfico hasta 100 minutos.
+
+```{r}
+k <- 0.02
+T_amb <- 30
+T0 <- 150
+t <- seq(0, 100, by = 1)
+T <- T_amb + (T0 - T_amb) * exp(-k * t)
+
+plot(t, T, type = "l", col = "blue",
+     xlab = "Tiempo [min]", ylab = "Temperatura [°C]",
+     main = "Enfriamiento de equipo minero")
+abline(h = T_amb, lty = 2, col = "red")
+legend("topright", legend = c("Temperatura", "T. ambiente"),
+       col = c("blue", "red"), lty = c(1,2))
+```
+
+***
+
+# Ejercicios Propuestos
+
+1. **Producción de contaminante:**  
+   La tasa de concentración de un contaminante en un río cerca de una mina se modela por:
+   \[
+   \frac{dC}{dt} = -aC
+   \]
+   donde \( C \) es la concentración y \( a \) es constante.  
+   - a) Resuelve la ecuación.
+   - b) Si \( C(0) = 200 \) ppm y \( a = 0.05 \,\text{h}^{-1} \), ¿cuánto queda después de 10 horas?
+
+2. **Filtración de agua:**  
+   El flujo de agua en un acuífero está dado por:
+   \[
+   \frac{dh}{dx} = -k h
+   \]
+   donde \( h \) es la altura del nivel freático y \( k \) una constante de filtración.  
+   - a) Resuelve la ecuación suponiendo que \( h(0) = 50 \) m.
+   - b) ¿Cuál es el nivel después de 100 m si \( k = 0.01\, \text{m}^{-1} \)?
+
+3. **Tiempo de descenso de temperatura:**  
+   Usando el ejemplo de enfriamiento, ¿en cuánto tiempo la temperatura baja de 150°C a 60°C si \( k = 0.02 \)?
+
+***
+
+# Respuestas
+
+- Incluye aquí tus soluciones desarrolladas.
+
+***
+
+# Referencias
+
+- Kreyszig, E. (2011). Advanced Engineering Mathematics.
+- Boyce, W., & DiPrima, R. (2012). Ecuaciones Diferenciales y Problemas con Valores en la Frontera.
+- Apuntes de clase, Cátedra de Matemáticas, Ingeniería de Minas.
