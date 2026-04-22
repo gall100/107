@@ -1,30 +1,95 @@
 ---
-title: 'Guía de Práctica: E'
-author: "V"
-date: "`r Sys.Date()`"
+title: 'Taller: El Lenguaje del Equilibrio Natural'
+author: "Departamento de Matemáticas Aplicadas"
+date: "`r format(Sys.time(), '%d de %B, %Y')`"
 output:
-  pdf_document: default
-  html_document: default
+  pdf_document:
+    toc: true
+    toc_depth: '3'
+  html_document:
+    theme: journal
+    highlight: kate
+    toc: true
+    toc_depth: 3
+    toc_float: true
+subtitle: Ecuaciones Diferenciales Ordinarias (EDO) Homogéneas
 ---
 
-# Introducción
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
-Las ecuaciones diferenciales 
+# 1. Información General del Taller
 
-***
+* **Tema:** Ecuaciones Diferenciales Ordinarias Homogéneas de Primer Orden.
+* **Objetivo:** Capacitar al estudiante en la identificación y resolución de EDO Homogéneas, comprendiendo su aplicación en el modelado de sistemas físicos y biológicos con propiedades de escalabilidad.
 
-# Teoría Básica
+---
 
-Una **ecuación diferencial de variables separables** tiene la forma:
-\[
-\frac{dy}{dx} = f(x)g(y)
-\]
-y puede escribirse como:
-\[
-\frac{1}{g(y)} dy = f(x) dx
-\]
-Luego, se integran ambos miembros:
-\[
-\int \frac{1}{g(y)} dy = \int f(x) dx
-\]
+# 2. Descripción del Tema 🌿
 
+Una ecuación diferencial de primer orden escrita en la forma $M(x, y)dx + N(x, y)dy = 0$ es **homogénea** si tanto $M$ como $N$ son funciones homogéneas del mismo grado.
+
+En el contexto ambiental, este tipo de ecuaciones describen procesos donde la **proporción** entre las variables es lo que dicta el comportamiento del sistema, como la mezcla de sustancias en tanques de volumen variable o la expansión de un contaminante en un ecosistema.
+
+---
+
+# 3. Clase Desarrollada (Marco Teórico)
+
+## A. Definición de Función Homogénea
+Una función $f(x, y)$ es homogénea de grado $n$ si:
+$$f(tx, ty) = t^n f(x, y)$$
+
+## B. La Técnica de Resolución
+Para resolver una EDO homogénea, se utiliza un cambio de variable que la transforma en una de **variables separables**.
+
+1.  **Sustitución:** $y = ux$
+2.  **Diferenciación:** $dy = u \, dx + x \, du$
+3.  **Reducción:** Al sustituir en la ecuación original y dividir por $x^n$, obtenemos una expresión en términos de $u$ y $x$.
+4.  **Separación de Variables:**
+    $$rac{dx}{x} + rac{N(1, u) du}{M(1, u) + u N(1, u)} = 0$$
+
+---
+
+# 4. Ejercicios Resueltos
+
+### Ejercicio 1: Modelado de Trayectoria
+**Enunciado:** Resuelva $(x^2 + y^2)dx + (x^2 - xy)dy = 0$.
+
+**Solución:**
+1. Verificamos homogeneidad: Todos los términos son de grado 2.
+2. Aplicamos $y = ux$ y $dy = u dx + x du$:
+   $$(x^2 + (ux)^2)dx + (x^2 - x(ux))(u dx + x du) = 0$$
+3. Simplificamos eliminando $x^2$:
+   $$(1 + u^2)dx + (1 - u)(u dx + x du) = 0$$
+   $$(1 + u^2 + u - u^2)dx + x(1 - u)du = 0$$
+   $$(1 + u)dx + x(1 - u)du = 0$$
+4. Separamos variables e integramos:
+   $$\int rac{dx}{x} + \int rac{1-u}{1+u} du = 0$$
+   $$\ln|x| + \int \left( -1 + rac{2}{1+u} 
+ight) du = 0$$
+   $$\ln|x| - u + 2\ln|1+u| = C$$
+5. Regresamos a la variable original ($u = y/x$):
+   $$\ln|x| - rac{y}{x} + 2\ln|1 + rac{y}{x}| = C$$
+
+---
+
+# 5. Evaluación de la Clase Desarrollada 📝
+
+*Resuelva los siguientes puntos para validar su aprendizaje:*
+
+1.  **Identificación:** Clasifique si la siguiente EDO es homogénea: $(x \sqrt{x^2 + y^2})dx - y^2 dy = 0$.
+2.  **Resolución:** Encuentre la solución general de $x rac{dy}{dx} = y + \sqrt{x^2 + y^2}$.
+3.  **Análisis:** Explique por qué el cambio de variable $x = vy$ podría ser más eficiente que $y = ux$ en algunos casos específicos.
+
+---
+
+# 6. Referencias con Enlaces Externos 🔗
+
+* [Khan Academy - Differential Equations](https://es.khanacademy.org/math/differential-equations)
+* [Wolfram|Alpha Step-by-step Solutions](https://www.wolframalpha.com/examples/mathematics/differential-equations/)
+* [Geogebra - Slope Field Visualizer](https://www.geogebra.org/m/W7S7f7U5)
+* [Libro de Texto: Dennis G. Zill - Ecuaciones Diferenciales](https://www.google.com/search?q=Zill+Ecuaciones+Diferenciales+PDF)
+
+---
+*Este material ha sido diseñado para fomentar el pensamiento crítico y la resolución de problemas en el ámbito de las ciencias exactas y naturales.*
