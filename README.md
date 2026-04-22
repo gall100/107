@@ -1,6 +1,6 @@
 # Apuntes_de_Clases V1rg1l1o
 
-Apuntes de clase para el curso "calculo y Ecuaciones Diferenciales"
+Apuntes de clase para el curso "cal y ED"
 
 ## Semestre ...
 
